@@ -3,6 +3,7 @@ Heavily Modified from RestForce 1.0.0
 '''
 
 from simple_salesforce.util import getUniqueElementValueFromXmlString
+from xml.sax.saxutils import escape
 import requests
 
 
@@ -39,7 +40,7 @@ def SalesforceLogin(username, password, security_token, sandbox=False,
                     <n1:password>{password}{token}</n1:password>
                 </n1:login>
             </env:Body>
-        </env:Envelope>""".format(username=username, password=password, token=security_token)
+        </env:Envelope>""".format(username=username, password=escape(password), token=security_token)
 
     login_soap_request_headers = {
         'content-type': 'text/xml',
